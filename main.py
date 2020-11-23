@@ -2,9 +2,11 @@ import os
 from os import system, name
 import time
 import nmap
+import sys
+import platform
 
-scanner = nmap.PortScanner()
-ver = scanner.nmap_version()
+#scanner = nmap.PortScanner()
+#ver = scanner.nmap_version()
 
 def clear () :
     if os.name == 'nt' :
@@ -19,37 +21,76 @@ def textColor () :
     else : 
         pass
 
+
 textColor()
 
 start = clear()
+
+print()
+def execute(cmd):
+    
+    ch=input("Do you want to execute the Command ?[y/n]:")
+    if(os.name=="nt" and  ch=="y"):
+        print(cmd)
+        os.system(cmd)
+        print("Scan Complete Exiting.....")
+        os.system("PAUSE")
+    elif(os.name=="posix" and ch=="y" or ch=="Y"):
+        print("Using linux")
+        cmd=f"sudo {cmd}"
+        os.system(cmd)
+        print("Scan Complete Exiting.....")
+    elif(ch=="n" or ch=="N"):
+        print("Ok Exiting ........")
+        print("Do folow me on Instagram : grady.css")
+    else:
+        print("Wrond Input !!")
+
+
+
 
 print(" 1 - english\n 2 - french")
 language = int(input("\n choose language ? "))
 
 def scan1 (host) :
-    print(" \n[+] command : sudo nmap",host)
+    cmd=f"nmap {host}"
+    print(f" \n[+] command : {cmd}")
+    time.sleep(2)
+    execute(cmd)
+    
 
 def scan2 (host) :
-    print(" \n[+] command : sudo nmap -sS",host)
+    cmd=f"nmap -sS {host}"
+    print(f" \n[+] command : {cmd}")
+    execute(cmd)
 
 def scan3 (host) :
-    print(" \n[+] command : sudo nmap -T4 -sV -sP",host)
+    cmd=f"nmap -T4 -sV -sP"
+    print(f" \n[+] command : {cmd} ")
+    execute(cmd);
+
 
 def scan4(host) : 
-    print(" \n[+] command : sudo nmap -T4 -O",host)
-
+    cmd=f" nmap -T4 -O {host}"
+    print(f" \n[+] command : {cmd}")
+    execute(cmd)
 def scan5(host) :
-    print(" \n[+] command : sudo nmap -T4 -A", host)
+    cmd=f"nmap -T4 -A {host}"
+    print(f" \n[+] command : {cmd}")
+    execute(cmd)
 
 def scan6(host) :
-    print(" \n[+] command : sudo nmap -T4 -sV -O", host)
-
+    cmd=f"nmap -T4 -sV -O"
+    print(f" \n[+] command : {cmd}")
+    execute(cmd)
 def scan7(host) :
-    print(" \n[+] command : sudo nmap -T4 -sV -A", host)
-
-def scan8(host) : 
-    print(" \n[+] command : sudo nmap -T4 -O -A",host)
-
+    cmd=f"nmap -T4 -sV -A {host}"
+    print(f" \n[+] command : {cmd}")
+    execute(cmd)
+def scan8(host) :
+    cmd=f" nmap -T4 -O -A {host}" 
+    print(f"\n[+] command :{cmd}")
+    execute(cmd)
 if language == 1 : 
     clear()
     print(" NMAP scan command generation tool by Grady\n")
