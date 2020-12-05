@@ -5,8 +5,7 @@ import nmap
 import sys
 import platform
 
-#scanner = nmap.PortScanner()
-#ver = scanner.nmap_version()
+scanner = nmap.PortScanner()
 
 def clear () :
     if os.name == 'nt' :
@@ -24,27 +23,30 @@ def textColor () :
 
 textColor()
 
-start = clear()
-
 print()
+
 def execute(cmd):
     
-    ch=input("Do you want to execute the Command ?[y/n]:")
+    ch=input(" \nDo you want to execute the Command ?[y/n]:")
+
     if(os.name=="nt" and  ch=="y"):
         print(cmd)
         os.system(cmd)
-        print("Scan Complete Exiting.....")
+        print(" \nScan Complete Exiting.....")
         os.system("PAUSE")
+
     elif(os.name=="posix" and ch=="y" or ch=="Y"):
-        print("Using linux")
+        print(" \nUsing linux")
         cmd=f"sudo {cmd}"
         os.system(cmd)
-        print("Scan Complete Exiting.....")
+        print(" \nScan Complete Exiting.....")
+
     elif(ch=="n" or ch=="N"):
-        print("Ok Exiting ........")
-        print("Do folow me on Instagram : grady.css")
+        print(" \nOk Exiting ........")
+        print(" \nDo folow me on Instagram : grady.css")
+
     else:
-        print("Wrond Input !!")
+        print(" \nWrong Input !!")
 
 
 
@@ -65,32 +67,35 @@ def scan2 (host) :
     execute(cmd)
 
 def scan3 (host) :
-    cmd=f"nmap -T4 -sV -sP"
+    cmd=f"nmap -T4 -sV -sP {host}"
     print(f" \n[+] command : {cmd} ")
-    execute(cmd);
-
+    execute(cmd)
 
 def scan4(host) : 
     cmd=f" nmap -T4 -O {host}"
     print(f" \n[+] command : {cmd}")
     execute(cmd)
+
 def scan5(host) :
     cmd=f"nmap -T4 -A {host}"
     print(f" \n[+] command : {cmd}")
     execute(cmd)
 
 def scan6(host) :
-    cmd=f"nmap -T4 -sV -O"
+    cmd=f"nmap -T4 -sV -O {host}"
     print(f" \n[+] command : {cmd}")
     execute(cmd)
+
 def scan7(host) :
     cmd=f"nmap -T4 -sV -A {host}"
     print(f" \n[+] command : {cmd}")
     execute(cmd)
+
 def scan8(host) :
     cmd=f" nmap -T4 -O -A {host}" 
     print(f"\n[+] command :{cmd}")
     execute(cmd)
+
 if language == 1 : 
     clear()
     print(" NMAP scan command generation tool by Grady\n")
@@ -140,6 +145,7 @@ elif option == 8 :
     scan8(host)
 
 elif option == 9 :
+    ver = scanner.nmap_version()
     print("\n",ver)
 
 elif option > 9 and language == 1 :
